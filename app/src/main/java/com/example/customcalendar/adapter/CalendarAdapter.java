@@ -10,8 +10,6 @@ import androidx.lifecycle.ViewModel;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
-import com.example.Day;
-import com.example.customcalendar.CalendarHeader;
 import com.example.customcalendar.R;
 import com.example.customcalendar.model.CalendarHeader;
 import com.example.customcalendar.model.Day;
@@ -30,6 +28,11 @@ public class CalendarAdapter extends RecyclerView.Adapter {
 
     public CalendarAdapter(List<Object> mCalendarList) {
         this.mCalendarList = mCalendarList;
+    }
+
+    public void setCalendarList(List<Object> calendarList) {
+        mCalendarList = calendarList;
+        notifyDataSetChanged();
     }
 
     @NonNull

@@ -1,4 +1,4 @@
-package com.example.customcalendar.Util;
+package com.example.customcalendar.util;
 
 public class Keys {
     public static final String EMPTY = "empty";
