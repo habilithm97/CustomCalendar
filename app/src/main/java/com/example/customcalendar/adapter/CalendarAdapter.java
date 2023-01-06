@@ -98,6 +98,9 @@ public class CalendarAdapter extends RecyclerView.Adapter {
 
     @Override
     public int getItemCount() {
+        if(mCalendarList != null) {
+            return mCalendarList.size();
+        }
         return 0;
     }
 

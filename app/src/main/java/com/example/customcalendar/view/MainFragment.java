@@ -27,6 +27,8 @@ public class MainFragment extends Fragment {
     private StaggeredGridLayoutManager layoutManager;
     private CalendarAdapter adapter;
 
+    private long mCurrentTime;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_main, container, false);
@@ -85,5 +87,9 @@ public class MainFragment extends Fragment {
         adapter.setCalendarList(mCalendarList);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
+    }
+
+    public void setTitle(long time) {
+        mCurrentTime = time;
     }
 }
