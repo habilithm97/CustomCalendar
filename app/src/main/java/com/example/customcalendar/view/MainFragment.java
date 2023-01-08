@@ -6,7 +6,6 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,8 +25,6 @@ public class MainFragment extends Fragment {
     RecyclerView recyclerView;
     private StaggeredGridLayoutManager layoutManager;
     private CalendarAdapter adapter;
-
-    private long mCurrentTime;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -55,8 +52,6 @@ public class MainFragment extends Fragment {
     }
 
     public void setCalendarList(GregorianCalendar cal) {
-        setTitle(cal.getTimeInMillis());
-
         ArrayList<Object> calendarList = new ArrayList<>();
 
         for (int i = -300; i < 300; i++) {
@@ -66,7 +61,7 @@ public class MainFragment extends Fragment {
                 calendarList.add(calendar.getTimeInMillis());
 
                 int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK) - 1; // DAY_OF_WEEK는 calendar가 가리키는 특정 날짜가 무슨 요일인지 알기 위해 쓰임
-                int max = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
+                int max = calendar.getActualMaximum(Calendar.DAY_OF_MONTH); // 해당 월의 말일 구하기
 
                 for (int j = 0; j < dayOfWeek; j++) {
                     calendarList.add(com.example.customcalendar.util.Keys.EMPTY);
@@ -87,9 +82,5 @@ public class MainFragment extends Fragment {
         adapter.setCalendarList(mCalendarList);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
-    }
-
-    public void setTitle(long time) {
-        mCurrentTime = time;
     }
 }

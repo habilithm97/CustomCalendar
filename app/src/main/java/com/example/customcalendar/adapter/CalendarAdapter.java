@@ -6,14 +6,12 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.lifecycle.ViewModel;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.example.customcalendar.R;
 import com.example.customcalendar.model.CalendarHeader;
 import com.example.customcalendar.model.Day;
-import com.example.customcalendar.model.EmptyDay;
 import com.example.customcalendar.model.MyViewModel;
 
 import java.util.Calendar;
@@ -42,6 +40,7 @@ public class CalendarAdapter extends RecyclerView.Adapter {
 
         if (viewType == HEADER) {
             HeaderViewHolder headerViewHolder = new HeaderViewHolder(inflater.inflate(R.layout.header_item, viewGroup, false));
+            // StaggeredGridLayout : 높이가 불규칙한 그리드 레이아웃
             StaggeredGridLayoutManager.LayoutParams params = (StaggeredGridLayoutManager.LayoutParams) headerViewHolder.itemView.getLayoutParams();
             params.setFullSpan(true); // Span을 하나로 통합하기
             headerViewHolder.itemView.setLayoutParams(params);
@@ -49,7 +48,6 @@ public class CalendarAdapter extends RecyclerView.Adapter {
 
         } else if (viewType == EMPTY) {
             return new EmptyViewHolder(inflater.inflate(R.layout.empty_item, viewGroup, false));
-
         } else {
             return new DayViewHolder(inflater.inflate(R.layout.day_item, viewGroup, false));
         }
@@ -61,8 +59,8 @@ public class CalendarAdapter extends RecyclerView.Adapter {
 
         if(viewType == HEADER) {
             HeaderViewHolder headerViewHolder = (HeaderViewHolder) viewHolder;
-            Object item = mCalendarList.get(position);
             CalendarHeader calendarHeader = new CalendarHeader();
+            Object item = mCalendarList.get(position);
 
             if(item instanceof Long) {
                 calendarHeader.setHeader((Long) item);
@@ -70,11 +68,10 @@ public class CalendarAdapter extends RecyclerView.Adapter {
             headerViewHolder.bind(calendarHeader);
 
         } else if(viewType == EMPTY) {
-
         } else if(viewType == DAY) {
             DayViewHolder dayViewHolder = (DayViewHolder) viewHolder;
-            Object item = mCalendarList.get(position);
             Day day = new Day();
+            Object item = mCalendarList.get(position);
 
             if(item instanceof Calendar) {
                 day.setCalendar((Calendar) item);
@@ -109,7 +106,6 @@ public class CalendarAdapter extends RecyclerView.Adapter {
 
         public HeaderViewHolder(@NonNull View itemView) {
             super(itemView);
-
             titleTv = (TextView)itemView.findViewById(R.id.titleTv);
         }
 
@@ -131,7 +127,6 @@ public class CalendarAdapter extends RecyclerView.Adapter {
 
         public DayViewHolder(@NonNull View itemView) {
             super(itemView);
-
             dayTv = (TextView)itemView.findViewById(R.id.dayTv);
         }
 
